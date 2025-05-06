@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
+   TextEditingController emailbox = TextEditingController();
+    
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -29,11 +32,13 @@ class _LoginScreenState  extends State<LoginScreen> {
       backgroundColor: statusWarna ? Colors.blue : Colors.pink,
       body: Column(
         children: [
-          TextField(),
+          TextField(
+            controller: widget.emailbox,
+          ),
           TextField(
             obscureText: statusPassword,
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: 'Password edit',
               hintText: 'Enter Your Password',
               prefixIcon: Icon(Icons.lock),
               suffixIcon: IconButton(
@@ -45,6 +50,11 @@ class _LoginScreenState  extends State<LoginScreen> {
               ),
             ),
           ),
+          ElevatedButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder:(context)=> HomeScreen(
+              email: widget.emailbox.text, 
+            )));
+          }, child: Text('Login')),
           ElevatedButton(
             onPressed: gantiWarna,
             child: const Text('ganti warna'),
